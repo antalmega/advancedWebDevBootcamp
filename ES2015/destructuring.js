@@ -40,7 +40,7 @@ Examples:
 // you will have to pass in the correct parameters for this function!
 function createStudent({likesES2015 = true, likesJavaScript = true} = {}){
     let str = 'The student'
-    if (likesES2015 && likesJavaScript) str += ' likes JavaScript and ES2015'
+    if (likesES2015 && likesJavaScript) str += ' likes JavaScript and ES2015!'
     else if (likesJavaScript) str += ' likes JavaScript!'
     else if (likesES2015) str += ' likes ES2015!'
     else str += ' does not like much...'
@@ -59,5 +59,8 @@ Examples:
 */
 
 function reverseArray(arr){
-    
+    for (let i = 0; i < arr.length / 2; i++) {
+        [arr[i], arr[arr.length - 1 - i]] = [arr[arr.length - 1 -i], arr[i]];
+    }
+    return arr;
 }
