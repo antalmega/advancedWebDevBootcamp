@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Component 1</title>
+    <link rel="stylesheet" href="first-component.css">
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="text/babel">
+    class HobbyList extends React.Component {
+      render() {
+        const hobbies = ["Dancing", "Sport", "Eating"];
+        const liStyle = {fontSize: '1.5em'};
+        return (
+          <ul>
+            {hobbies.map((hobbie, i) => {
+              return <li key={i} style={liStyle}>{hobbie}</li>
+            })}
+          </ul>
+        );
+      }
+          }
+    class Pet extends React.Component {
+      render() {
+        return (
+          <div className="card">
+            <h2 className="name">My Children in 2002</h2>
+            <img src="https://github.com/antalmega/MyChildren2002/raw/master/MyChildren2002.jpg"
+                 alt="My children" />
+            <h5 style={{fontSize: '2em', margin: '2px'}} >Hobbies:</h5>
+            <HobbyList />
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Pet />, document.getElementById("app"));
+  </script>
+</body>
+</html>
