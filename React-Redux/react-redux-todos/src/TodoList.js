@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Todo from './Todo'
 import { connect } from 'react-redux';
+import { updateTodo } from './actionCreators';
 
 class TodoList extends Component {
  constructor(props) {
@@ -11,6 +12,7 @@ class TodoList extends Component {
      task: ""
    };
  }
+ 
  handleSubmit(e) {
   e.preventDefault();
   this.props.dispatch({
@@ -30,11 +32,17 @@ class TodoList extends Component {
      id
    });
  }
+ updateTodo(id) {
+   this.props.dispatch(updateTodo(id));
+ }
+
  render() {
    let todos = this.props.todos.map((val, index) => (
     <Todo
       removeTodo={this.removeTodo.bind(this, val.id)}
+      onToggle={this.updateTodo.bind(this, val.id)}
       task={val.task}
+      completed={val.completed}
       key={index}
     />
    ));
