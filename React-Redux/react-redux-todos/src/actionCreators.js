@@ -24,10 +24,10 @@ function HanddleRemove(id) {
   };
 }
 
-export function updateTodo(id) {
+export function handleUpdate(todo) {
   return {
     type: UPDATE_TODO,
-    id
+    todo
   };
 }
 
@@ -51,6 +51,21 @@ export function addTodo(task) {
     })
       .then(res => res.json())
       .then(data => dispatch(handleAdd(data)))
+      .catch(err => console.log('SOMETHING WENT WRONG!', err));
+  };
+}
+
+export function updateTodo(todo) {
+  return dispatch => {
+    return fetch(`http://localhost:3001/api/todos/${todo._id}`, {
+      method: 'PUT',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({ completed: !todo.completed })
+    })
+      .then(res => res.json())
+      .then(data => dispatch(handleUpdate(data)))
       .catch(err => console.log('SOMETHING WENT WRONG!', err));
   };
 }

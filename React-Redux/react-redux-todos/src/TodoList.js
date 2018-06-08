@@ -19,18 +19,18 @@ class TodoList extends Component {
   removeTodo(id) {
     this.props.removeTodo(id);
   }
-  updateTodo(id) {
-    this.props.updateTodo(id);
+  updateTodo(todo) {
+    this.props.updateTodo(todo);
   }
 
   render() {
-    let todos = this.props.todos.map(val => (
+    let todos = this.props.todos.map(todo => (
       <Todo
-        removeTodo={this.removeTodo.bind(this, val._id)}
-        onToggle={this.updateTodo.bind(this, val._id)}
-        task={val.task}
-        completed={val.completed}
-        key={val._id}
+        removeTodo={this.removeTodo.bind(this, todo._id)}
+        onToggle={this.updateTodo.bind(this, todo)}
+        task={todo.task}
+        completed={todo.completed}
+        key={todo._id}
       />
     ));
     return (

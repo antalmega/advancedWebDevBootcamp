@@ -24,8 +24,8 @@ export default function rootReducer(state = initialState, action) {
     case UPDATE_TODO:
       let updatedTodos = state.todos.map(
         todo =>
-          todo.id === action.id
-            ? { ...todo, completed: !todo.completed }
+          todo._id === action.todo._id
+            ? { ...todo, completed: action.todo.completed }
             : { ...todo }
       );
       return { ...state, todos: updatedTodos };

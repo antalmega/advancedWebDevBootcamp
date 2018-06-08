@@ -1,20 +1,26 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const Todo = require("../models/todo");
+const Todo = require('../models/todo');
 
-router.get("/", function(req, res, next) {
+router.get('/', function(req, res, next) {
   Todo.find({})
     .then(todos => res.send(todos))
     .catch(err => next(err));
 });
 
-router.post("/", function(req, res, next) {
+router.post('/', function(req, res, next) {
   Todo.create(req.body)
     .then(todo => res.status(201).send(todo))
     .catch(err => next(err));
 });
 
-router.delete("/:id", function(req, res, next) {
+router.put('/:id', function(req, res, next) {
+  Todo.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then(todo => res.send(todo))
+    .catch(err => next(err));
+});
+
+router.delete('/:id', function(req, res, next) {
   Todo.findByIdAndRemove(req.params.id)
     .then(todo => res.send(todo))
     .catch(err => next(err));
