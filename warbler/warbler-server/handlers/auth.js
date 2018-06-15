@@ -8,9 +8,8 @@ exports.signin = async function(req, res, next) {
       email: req.body.email
     });
     let { id, username, profileImageUrl } = user;
-    let password = req.body.password;
     // cheching if his password matches what we sent to the server
-    let isMatch = await user.comparePassword(password);
+    let isMatch = await user.comparePassword(req.body.password);
     // if it al matches
     if (isMatch) {
       let token = jwt.sign(
@@ -26,9 +25,7 @@ exports.signin = async function(req, res, next) {
         id,
         username,
         profileImageUrl,
-        token,
-        password,
-        isMatch
+        token
       });
     } else {
       return next({
@@ -37,10 +34,7 @@ exports.signin = async function(req, res, next) {
       });
     }
   } catch (err) {
-    return next({
-      status: 400,
-      message: "Invalid Email/Password."
-    });
+    return next(err);
   }
 };
 
