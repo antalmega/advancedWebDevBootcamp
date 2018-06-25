@@ -1,5 +1,4 @@
 import axios from "axios";
-import errors from "../store/reducers/errors";
 
 export function setTokenHeader(token) {
   if (token) {
