@@ -7,6 +7,12 @@ exports.signin = async function(req, res, next) {
     let user = await db.User.findOne({
       email: req.body.email
     });
+    if (!user) {
+      return next({
+        status: 400,
+        message: "Invalid Email."
+      });
+    }
     let { id, username, profileImageUrl } = user;
     // cheching if his password matches what we sent to the server
     let isMatch = await user.comparePassword(req.body.password);
@@ -30,7 +36,7 @@ exports.signin = async function(req, res, next) {
     } else {
       return next({
         status: 400,
-        message: "Invalid Email/Password."
+        message: "Invalid Password."
       });
     }
   } catch (err) {
